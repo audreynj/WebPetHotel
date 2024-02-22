@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.Pets;
+import model.Pet;
 /**
  * Servlet implementation class EditPetServlet
  */
@@ -36,7 +36,7 @@ public class EditPetServlet extends HttpServlet {
 		String owner = request.getParameter("owner");
 		Integer tempId = Integer.parseInt(request.getParameter("id"));
 				
-		Pets petToUpdate = ph.searchForPetById(tempId);
+		Pet petToUpdate = ph.searchForPetById(tempId);
 		petToUpdate.setType(type);
 		petToUpdate.setName(name);
 		petToUpdate.setOwner(owner);

@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.Pets;
+import model.Pet;
 
 /**
  * Servlet implementation class navigationServlet
@@ -51,7 +51,7 @@ public class NavigationServlet extends HttpServlet {
 		if (act.equals("delete")) {
 			try {
 				Integer tempId = Integer.parseInt(request.getParameter("id"));
-				Pets petToDelete = ph.searchForPetById(tempId);
+				Pet petToDelete = ph.searchForPetById(tempId);
 				ph.deletePetInformation(petToDelete);
 
 			} catch (NumberFormatException e) {
@@ -61,7 +61,7 @@ public class NavigationServlet extends HttpServlet {
 		} else if (act.equals("edit")) {
 			try {
 				Integer tempId = Integer.parseInt(request.getParameter("id"));
-				Pets petToEdit = ph.searchForPetById(tempId);
+				Pet petToEdit = ph.searchForPetById(tempId);
 				request.setAttribute("petToEdit", petToEdit);
 				path = "/edit-pet.jsp";
 			} catch (NumberFormatException e) {

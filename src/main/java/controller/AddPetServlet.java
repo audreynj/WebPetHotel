@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.Pets;
+import model.Pet;
 
 /**
  * Servlet implementation class AddPetServlet
@@ -35,7 +35,7 @@ public class AddPetServlet extends HttpServlet {
 		if (type.isEmpty() || name.isEmpty() || owner.isEmpty() || type == null || name == null || owner==null) {
 			getServletContext().getRequestDispatcher("/index.html").forward(request, response);
 		} else {
-			Pets p = new Pets(type, name, owner);
+			Pet p = new Pet(type, name, owner);
 			PetHelper ph = new PetHelper();
 			ph.insertPet(p);
 

@@ -7,7 +7,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
-import model.Pets;
+import model.Pet;
 
 /**
  * Audrey N. Johnston - ajohnston10
@@ -19,7 +19,7 @@ public class PetHelper {
 
 	static EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("WebPetHotel");
 	
-	public void insertPet(Pets p) {
+	public void insertPet(Pet p) {
 		EntityManager em = emfactory.createEntityManager();	
 		em.getTransaction().begin();	
 		em.persist(p);	
@@ -27,16 +27,16 @@ public class PetHelper {
 		em.close();	
 	}
 	
-	public List<Pets> showAllPets(){
+	public List<Pet> showAllPets(){
 		EntityManager em = emfactory.createEntityManager();	
-		List<Pets> allPets = em.createQuery("SELECT i FROM Pets i").getResultList();	
+		List<Pet> allPets = em.createQuery("SELECT i FROM Pet i").getResultList();	
 		return allPets;	
 	}
 	
-	public void deletePetInformation(Pets toDelete) {
+	public void deletePetInformation(Pet toDelete) {
 		EntityManager em = emfactory.createEntityManager();
 		em.getTransaction().begin();
-		TypedQuery<Pets> typedQuery = em.createQuery("select p from Pets p where p.type = :selectedType and p.name = :selectedName and p.owner = :selectedOwner", Pets.class);
+		TypedQuery<Pet> typedQuery = em.createQuery("select p from Pet p where p.type = :selectedType and p.name = :selectedName and p.owner = :selectedOwner", Pet.class);
 	
 		//Substitute parameter with actual data from the toDelete item
 		typedQuery.setParameter("selectedType", toDelete.getType());	
@@ -48,7 +48,7 @@ public class PetHelper {
 		typedQuery.setMaxResults(1);
 		
 		//get the result and save it into a new list item
-		Pets result = typedQuery.getSingleResult();
+		Pet result = typedQuery.getSingleResult();
 		
 		//remove it
 		em.remove(result);	
@@ -56,16 +56,16 @@ public class PetHelper {
 		em.close();	
 	}
 	
-	public Pets searchForPetById(int idToEdit) {
+	public Pet searchForPetById(int idToEdit) {
 		// TODO Auto-generated method stub
 		EntityManager em = emfactory.createEntityManager();
 		em.getTransaction().begin();
-		Pets found = em.find(Pets.class, idToEdit);
+		Pet found = em.find(Pet.class, idToEdit);
 		em.close();
 		return found;
 	}
 	
-	public void updatePetImformation(Pets toEdit) {
+	public void updatePetImformation(Pet toEdit) {
 		// TODO Auto-generated method stub
 		EntityManager em = emfactory.createEntityManager();
 		em.getTransaction().begin();
@@ -74,35 +74,35 @@ public class PetHelper {
 		em.close();
 	}
 	
-	public List<Pets> searchForPetByType(String petType){
+	public List<Pet> searchForPetByType(String petType){
 		EntityManager em = emfactory.createEntityManager();
 		em.getTransaction().begin();
-		TypedQuery<Pets> typedQuery = em.createQuery("select p from Pets p where p.type = :selectedType", Pets.class);
+		TypedQuery<Pet> typedQuery = em.createQuery("select p from Pet p where p.type = :selectedType", Pet.class);
 		typedQuery.setParameter("selectedType", petType);
 		
-		List<Pets> foundPets = typedQuery.getResultList();
+		List<Pet> foundPets = typedQuery.getResultList();
 		em.close();
 		return foundPets;
 	}
 	
-	public List<Pets> searchForPetByName(String petName){
+	public List<Pet> searchForPetByName(String petName){
 		EntityManager em = emfactory.createEntityManager();
 		em.getTransaction().begin();
-		TypedQuery<Pets> typedQuery = em.createQuery("select p from Pets p where p.name = :selectedName", Pets.class);
+		TypedQuery<Pet> typedQuery = em.createQuery("select p from Pet p where p.name = :selectedName", Pet.class);
 		typedQuery.setParameter("selectedName", petName);
 		
-		List<Pets> foundPets = typedQuery.getResultList();
+		List<Pet> foundPets = typedQuery.getResultList();
 		em.close();
 		return foundPets;
 	}
 	
-	public List<Pets> searchForPetByOwner(String petOwner){
+	public List<Pet> searchForPetByOwner(String petOwner){
 		EntityManager em = emfactory.createEntityManager();
 		em.getTransaction().begin();
-		TypedQuery<Pets> typedQuery = em.createQuery("select p from Pets p where p.owner = :selectedOwner", Pets.class);
+		TypedQuery<Pet> typedQuery = em.createQuery("select p from Pet p where p.owner = :selectedOwner", Pet.class);
 		typedQuery.setParameter("selectedOwner", petOwner);
 		
-		List<Pets> foundPets = typedQuery.getResultList();
+		List<Pet> foundPets = typedQuery.getResultList();
 		em.close();
 		return foundPets;
 	}

@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="pets")
 
-public class Pets {
+public class Pet {
 
 	@Id
 	@GeneratedValue
@@ -62,11 +62,11 @@ public class Pets {
 	
 
 	//Constructors
-	public Pets() {
+	public Pet() {
 		super();
 	}
 	
-	public Pets (String type, String name, String owner) {
+	public Pet (String type, String name, String owner) {
 		super();
 		this.type = type;
 		this.name = name;
